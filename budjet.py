@@ -21,7 +21,7 @@ class BudgetTracker:
 print("가계부에 오신 것을 환영합니다.")
 tracker = BudgetTracker()
 
-while True:
+while False:
     print("1.지출 추가하기\n2.지출 목록보기\n3.총 지출 확인하기\n4.종료하기")
     num = int(input("원하시는 번호를 입력해주세요: "))
     if num == 1:    
@@ -39,7 +39,7 @@ while True:
     elif num == 4:
         break
     else:
-        print("똑바로 써라")
+        print("똑바로 써시길 바래요~")
 
 
     
