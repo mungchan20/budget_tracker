@@ -1,3 +1,5 @@
+import json
+
 class BudgetTracker:
     def __init__(self):
         self.expenses=[]
@@ -32,9 +34,22 @@ class BudgetTracker:
     def delete_expense(self,num):
         del self.expenses[num-1]
 
+    def save_to_file(self):
+        with open("expenses.json","w",encoding="utf-8") as f:
+            json.dump(self.expenses,f,ensure_ascii=False)
+
+    def load_from_file(self):
+        with open("expenses.json","r",encoding="utf-8") as f:
+            self.expenses = json.load(f)
+
 print("가계부에 오신 것을 환영합니다.")
 tracker = BudgetTracker()
 valid_type = ["카드","현금"]
+
+try:
+    tracker.load_from_file()
+except FileNotFoundError:
+    print("저장된 기록이 없습니다. 새로시작합니다.")
 
 while True:
     print("1.지출 추가하기\n2.지출 목록보기\n3.총 지출 확인하기\n4.지출 삭제하기\n5.유형별 합계\n6.종료하기")
@@ -67,6 +82,7 @@ while True:
         else:
             print("카드 또는 현금만 입력 가능")
     elif num == 6:
+        tracker.save_to_file()
         break
     else:
         print("똑바로 써라")
